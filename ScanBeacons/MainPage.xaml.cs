@@ -81,6 +81,7 @@ namespace ScanBeacons
             }
             Debug.WriteLine("-----------------");
         }
+
         private void ChangeScanState()
         {
             isScanning = !isScanning;
@@ -110,14 +111,12 @@ namespace ScanBeacons
 
         private void ScanButton_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(">> ScanButton_Click");
             ChangeScanState();
         }
 
         private void BeaconListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Debug.WriteLine(">> BeaconListView_ItemClick");
-            Debug.WriteLine($">> Item: {e.ClickedItem}");
+            Debug.WriteLine($">> Copy string: {e.ClickedItem}");
 
             var dataPackage = new DataPackage
             {
@@ -130,7 +129,7 @@ namespace ScanBeacons
             if (CopiedPanel.Visibility == Visibility.Collapsed)
             {
                 CopiedPanel.Visibility = Visibility.Visible;
-                var delay = TimeSpan.FromSeconds(12.5);
+                var delay = TimeSpan.FromSeconds(2);
                 var DelayTimer = ThreadPoolTimer.CreateTimer((source) =>
                 {
                     _ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
