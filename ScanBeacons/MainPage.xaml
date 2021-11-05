@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="ScanBeacons.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ScanBeacons"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ListView
+            Grid.Row="0"
+            x:Name="BeaconListView"
+            ItemsSource="{x:Bind Beacons}"
+            HorizontalAlignment="Stretch"
+            Margin="0,10,0,60"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollMode="Auto"
+            IsItemClickEnabled="True"
+            ItemClick="BeaconListView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:BeaconInfo">
+                    <Grid Padding="15,12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0">
+                            <Run Text="{x:Bind Uuid}" FontSize="18"/>
+                        </TextBlock>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Padding="20,5,30,10">
+                                <Run Text="Mojor : "/>
+                                <Run Text="{x:Bind Major}"/>
+                            </TextBlock>
+                            <TextBlock Padding="30,5,30,10">
+                                <Run Text="Minor : "/>
+                                <Run Text="{x:Bind Minor}"/>
+                            </TextBlock>
+                            <TextBlock Padding="30,5,30,10">
+                                <Run Text="RSSI : "/>
+                                <Run Text="{x:Bind Rssi}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection/>
+            </ListView.ItemContainerTransitions>
+        </ListView>
+
+        <StackPanel 
+            Grid.Row="1" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Height="60">
+            <ProgressBar
+                x:Name="StateProgressBar"
+                IsIndeterminate="True"
+                HorizontalAlignment="Stretch"/>
+            <Button
+                x:Name="ScanButton"
+                Content="Scan"
+                HorizontalAlignment="Stretch"
+                Margin="20,10,20,15"
+                Height="35"
+                Click="ScanButton_Click"/>
+        </StackPanel>
+
+        <Grid
+            x:Name="CopiedPanel"
+            Background="#151515"
+            Opacity=".85"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Center" 
+            Width="60" 
+            Height="25">
+            <TextBlock
+                Text="Copied!" 
+                Foreground="White" 
+                FontSize="12"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>
