@@ -24,15 +24,15 @@ namespace ScanBeacons
         {
             if (data[0] != 0x02)
             {
-                throw new ArgumentException("First byte in array was exptected to be 0x02", "bytes");
+                throw new ArgumentException("First byte in array was exptected to be 0x02", nameof(data));
             }
             if (data[1] != 0x15)
             {
-                throw new ArgumentException("Second byte in array was expected to be 0x15", "bytes");
+                throw new ArgumentException("Second byte in array was expected to be 0x15", nameof(data));
             }
             if (data.Length != 23)
             {
-                throw new ArgumentException("Byte array length was expected to be 23", "bytes");
+                throw new ArgumentException("Byte array length was expected to be 23", nameof(data));
             }
 
             var uuid = new Guid(
